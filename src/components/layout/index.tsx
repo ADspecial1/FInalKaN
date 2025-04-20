@@ -1,7 +1,8 @@
 import React, { PropsWithChildren } from "react";
 import { ThemedLayoutV2, ThemedTitleV2 } from "@refinedev/antd";
 import Header from "./Header";
-import FAV from '../../../public/favicon.ico'
+// import FAV from '../../../public/favicon.ico'
+import FAV from '../../../public/ksn-removebg-preview (1).png'
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const layoutStyles = {

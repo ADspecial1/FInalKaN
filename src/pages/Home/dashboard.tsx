@@ -78,10 +78,16 @@
 
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
-import { DashboardTotalCountCard, DealsCharts, LatestActivities, UpcomingEvents } from "@/components";
+import {
+  DashboardTotalCountCard,
+  DealsCharts,
+  LatestActivities,
+  UpcomingEvents,
+  DealsPieChart,
+} from "@/components";
 import { db } from "../../firebase/firebase"; // Firebase config file
 import { collection, getDocs } from "firebase/firestore";
-import CompanyMap from "../../CompanyMap";  // Import the CompanyMap component
+// import CompanyMap from "../../DealsPieChart";  // Import the CompanyMap component
 
 export const Home = () => {
   const [companies, setCompanies] = useState(0);
@@ -142,8 +148,8 @@ export const Home = () => {
       </Row>
 
       <Row gutter={[32, 32]} style={{ marginTop: "32px" }}>
-        <Col xs={24} sm={24} xl={6}>
-          <CompanyMap />
+        <Col xs={24} sm={24} xl={8} style={{ height: "500px" }}>
+          <DealsPieChart />
         </Col>
       </Row>
 
@@ -155,7 +161,6 @@ export const Home = () => {
     </div>
   );
 };
-
 
 // import React, { useEffect, useState } from "react";
 // import { Col, Row, Spin, Alert } from "antd";

@@ -220,7 +220,6 @@ import {
   Refine,
   WelcomePage,
 } from "@refinedev/core";
-import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
@@ -254,12 +253,11 @@ import KanbanBoardView from "./pages/developerPanel/KanbanBoardView";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/FInalKaN">
       <GitHubBanner />
       <RefineKbarProvider>
         <AntdApp>
-          <DevtoolsProvider>
-            <Refine
+          <Refine
               dataProvider={dataProvider}
               liveProvider={liveProvider}
               notificationProvider={useNotificationProvider}
@@ -318,8 +316,6 @@ function App() {
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
-            <DevtoolsPanel />
-          </DevtoolsProvider>
         </AntdApp>
       </RefineKbarProvider>
     </BrowserRouter>

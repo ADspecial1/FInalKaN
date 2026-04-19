@@ -65,7 +65,7 @@
 //       setDeals(updatedDeals);
 //       await updateDoc(doc(db, "sales_pipeline", draggableId), {
 //         status: newStatus,
-//         date: new Date().toLocaleDateString(), // Save latest move date
+//         date: new Date().toISOString(), // Save latest move date
 //       });
 //       message.success("Deal status updated");
 //     } catch (error) {
@@ -85,7 +85,7 @@
 //         company: selectedCompany.name,
 //         amount: parseFloat(values.amount),
 //         status: values.status || "new",
-//         date: new Date().toLocaleDateString(), // Store in string format like "15/04/2025"
+//         date: new Date().toISOString(), // Store in string format like "15/04/2025"
 //         userId: user.email,
 //       };
 
@@ -277,7 +277,7 @@
 //       setDeals(updatedDeals);
 //       await updateDoc(doc(db, "sales_pipeline", draggableId), {
 //         status: newStatus,
-//         date: new Date().toLocaleDateString(),
+//         date: new Date().toISOString(),
 //       });
 //       message.success("Deal status updated");
 //     } catch (error) {
@@ -297,7 +297,7 @@
 //         company: selectedCompany.name,
 //         amount: parseFloat(values.amount),
 //         status: values.status || "new",
-//         date: new Date().toLocaleDateString(),
+//         date: new Date().toISOString(),
 //         userId: user.email,
 //       };
 
@@ -564,7 +564,7 @@
 //       setDeals(updatedDeals);
 //       await updateDoc(doc(db, "sales_pipeline", draggableId), {
 //         status: newStatus,
-//         date: new Date().toLocaleDateString(),
+//         date: new Date().toISOString(),
 //       });
 //       message.success("Deal status updated");
 //     } catch (error) {
@@ -584,7 +584,7 @@
 //         company: selectedCompany.name,
 //         amount: parseFloat(values.amount),
 //         status: values.status || "new",
-//         date: new Date().toLocaleDateString(),
+//         date: new Date().toISOString(),
 //         userId: user!.email,
 //       };
 
@@ -990,7 +990,7 @@ export const SalesPipeline = () => {
       setDeals(updatedDeals);
       await updateDoc(doc(db, "sales_pipeline", draggableId), {
         status: newStatus,
-        date: new Date().toLocaleDateString(),
+        date: new Date().toISOString(),
       });
       message.success("Deal status updated");
     } catch (error) {
@@ -1010,7 +1010,7 @@ export const SalesPipeline = () => {
         company: selectedCompany.name,
         amount: parseFloat(values.amount),
         status: values.status || "new",
-        date: new Date().toLocaleDateString(),
+        date: new Date().toISOString(),
         userId: user!.email,
       };
 
@@ -1193,9 +1193,11 @@ export const SalesPipeline = () => {
                                     marginTop: 6,
                                   }}
                                 >
-                                  {new Intl.DateTimeFormat("en-IN", {
-                                    dateStyle: "medium",
-                                  }).format(new Date(deal.date))}
+                                  {(() => {
+                                    const d = deal.date ? new Date(deal.date) : null;
+                                    if (!d || isNaN(d.getTime())) return "—";
+                                    return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(d);
+                                  })()}
                                 </div>
                               </div>
                             )}

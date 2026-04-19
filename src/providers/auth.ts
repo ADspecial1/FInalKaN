@@ -294,18 +294,19 @@ export const authProvider: AuthBindings = {
   },
 
   check: async () => {
+    // Fast path: Firebase has already resolved the current user
+    if (auth.currentUser) {
+      return { authenticated: true };
+    }
+    // Slow path: wait for Firebase to restore the persisted session,
+    // then immediately unsubscribe to avoid a listener leak
     return new Promise((resolve) => {
-      auth.onAuthStateChanged((user) => {
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        unsubscribe();
         if (user) {
-          resolve({
-            authenticated: true,
-            redirectTo: "/",
-          });
+          resolve({ authenticated: true });
         } else {
-          resolve({
-            authenticated: false,
-            redirectTo: "/login",
-          });
+          resolve({ authenticated: false, redirectTo: "/login" });
         }
       });
     });

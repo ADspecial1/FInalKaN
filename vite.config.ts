@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
-  base: '/FInalKaN/',   // IMPORTANT
+  base: './',   // 👈 keep this for Netlify
   plugins: [react()],
   resolve: {
     alias: {

@@ -253,7 +253,7 @@ import KanbanBoardView from "./pages/developerPanel/KanbanBoardView";
 
 function App() {
   return (
-    <BrowserRouter basename="/FInalKaN">
+    <BrowserRouter>
       <GitHubBanner />
       <RefineKbarProvider>
         <AntdApp>

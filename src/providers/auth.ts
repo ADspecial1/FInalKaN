@@ -328,4 +328,9 @@ export const authProvider: AuthBindings = {
   },
 
   getPermissions: async () => null,
+
+  onError: async (error) => {
+    console.error(error);
+    return { error };
+  },
 };

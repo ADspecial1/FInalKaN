@@ -15,7 +15,7 @@ export const handleGoogleLogin = async () => {
 
     if (!docSnap.exists()) {
       // Ask user to choose role (Manager or Developer)
-      const role = prompt("Enter your role: manager or developer").toLowerCase();
+      const role = (prompt("Enter your role: manager or developer") || "").toLowerCase();
 
       await setDoc(userRef, {
         email: user.email,

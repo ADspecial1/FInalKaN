@@ -264,9 +264,6 @@ function App() {
               routerProvider={routerBindings}
               authProvider={authProvider}
               resources={resources}
-              Layout={(props) => (
-                <ThemedLayoutV2 {...props} Title={CustomTitle} />
-              )}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -283,7 +280,7 @@ function App() {
                 {/* Protected Main Layout */}
                 <Route
                   element={
-                    <Authenticated fallback={<CatchAllNavigate to="/login" />}>
+                    <Authenticated key="auth-main" fallback={<CatchAllNavigate to="/login" />}>
                       <Layout>
                         <Outlet />
                       </Layout>
@@ -302,7 +299,7 @@ function App() {
                 <Route
                   path="developer-dashboard"
                   element={
-                    <Authenticated fallback={<CatchAllNavigate to="/login" />}>
+                    <Authenticated key="auth-dev" fallback={<CatchAllNavigate to="/login" />}>
                       <DeveloperLayout />
                     </Authenticated>
                   }

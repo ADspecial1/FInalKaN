@@ -118,7 +118,7 @@ import {
 import { setDoc, Timestamp } from "firebase/firestore";
 
 // Example function to create or update a deal
-const createOrUpdateDeal = async (dealId, dealData) => {
+const createOrUpdateDeal = async (dealId: string, dealData: Record<string, unknown>) => {
   try {
     await setDoc(doc(db, "sales_pipeline", dealId), {
       ...dealData,

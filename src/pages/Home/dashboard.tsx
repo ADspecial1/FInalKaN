@@ -76,7 +76,7 @@
 //   );
 // };
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Row } from "antd";
 import {
   DashboardTotalCountCard,
@@ -85,56 +85,20 @@ import {
   UpcomingEvents,
   DealsPieChart,
 } from "@/components";
-import { db } from "../../firebase/firebase"; // Firebase config file
-import { collection, getDocs } from "firebase/firestore";
-// import CompanyMap from "../../DealsPieChart";  // Import the CompanyMap component
 
 export const Home = () => {
-  const [companies, setCompanies] = useState(0);
-  const [contacts, setContacts] = useState(0);
-  const [deals, setDeals] = useState(0);
-
-  useEffect(() => {
-    const fetchCounts = async () => {
-      // Companies Count
-      const companiesSnapshot = await getDocs(collection(db, "company"));
-      setCompanies(companiesSnapshot.size);
-
-      // Contacts Count
-      const contactsSnapshot = await getDocs(collection(db, "contacts"));
-      setContacts(contactsSnapshot.size);
-
-      // Deals Count
-      const dealsSnapshot = await getDocs(collection(db, "sales_pipeline"));
-      setDeals(dealsSnapshot.size);
-    };
-
-    fetchCounts();
-  }, []);
 
   return (
     <div>
       <Row gutter={[32, 32]}>
         <Col xs={24} sm={24} xl={8}>
-          <DashboardTotalCountCard
-            resource="companies"
-            totalCount={companies}
-            isLoading={false}
-          />
+          <DashboardTotalCountCard resource="companies" />
         </Col>
         <Col xs={24} sm={24} xl={8}>
-          <DashboardTotalCountCard
-            resource="contacts"
-            totalCount={contacts}
-            isLoading={false}
-          />
+          <DashboardTotalCountCard resource="contacts" />
         </Col>
         <Col xs={24} sm={24} xl={8}>
-          <DashboardTotalCountCard
-            resource="deals"
-            totalCount={deals}
-            isLoading={false}
-          />
+          <DashboardTotalCountCard resource="deals" />
         </Col>
       </Row>
 

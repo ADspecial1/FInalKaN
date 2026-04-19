@@ -282,7 +282,7 @@ const { Sider, Content, Header } = Layout;
 const { Title } = Typography;
 
 const DeveloperPanelLayout: React.FC = () => {
-  const { data: user } = useGetIdentity(); // Get user data
+  const { data: user } = useGetIdentity<{ name?: string; avatarUrl?: string }>(); // Get user data
   const location = useLocation();
   const navigate = useNavigate();
   const { mutate: logout } = useLogout(); // Refine's logout function

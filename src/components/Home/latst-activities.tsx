@@ -273,7 +273,7 @@ interface Deal {
   id: string;
   amount: number;
   company: string;
-  date: Timestamp; // Firestore Timestamp
+  date: Date;
   status: string;
   title: string;
   userId: string;
@@ -317,7 +317,7 @@ const LatestActivities: React.FC = () => {
             id: doc.id,
             ...data,
             date,
-          };
+          } as Deal;
         });
 
         // Sort and limit to the latest 5 deals

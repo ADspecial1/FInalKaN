@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { db } from "../../firebase/firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 const TaskList: React.FC<{ tasks: any[], column: string, userId: string }> = ({ tasks, column, userId }) => {
   
@@ -20,11 +22,9 @@ const TaskList: React.FC<{ tasks: any[], column: string, userId: string }> = ({ 
   };
 
   const updateTaskStatusInDb = async (taskId: string, newStatus: string) => {
-    // Update the task's status in Firebase database
     try {
-      const taskRef = db.collection("tasks").doc(taskId);
-      await taskRef.update({ status: newStatus });
-      console.log(`Task ${taskId} status updated to ${newStatus}`);
+      const taskRef = doc(db, "tasks", taskId);
+      await updateDoc(taskRef, { status: newStatus });
     } catch (err) {
       console.error("Error updating task status:", err);
     }
